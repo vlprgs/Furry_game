@@ -77,6 +77,7 @@ document.addEventListener("DOMContentLoaded", function() {
               game.showFurry();
               game.showCoin();
               game.startGame();
+              game.showObstacle();
 
 function Furry() {
     this.x = 0;
@@ -88,6 +89,10 @@ function Coin() {
     this.x = Math.floor(Math.random() * 10);
     this.y = Math.floor(Math.random() * 10);
 }
+function Obstacle() {
+    this.x = Math.floor(Math.random() * 10);
+    this.y = Math.floor(Math.random() * 10);
+}
 
 
 
@@ -95,6 +100,7 @@ function Game() {
           this.board=document.querySelectorAll("#board div");
           this.furry = new Furry();
           this.coin = new Coin();
+          this.obstacle = new Obstacle()
           this.score = 0;
 
           var self=this;
@@ -111,6 +117,9 @@ function Game() {
             }
             this.showCoin = function() {
               this.board[ this.index(this.coin.x,this.coin.y) ].classList.add("coin");
+              }
+              this.showObstacle = function() {
+                this.board[ this.index(this.obstacle.x,this.obstacle.y) ].classList.add("obstacle");
               }
 
             this.moveFurry = function() {
@@ -170,6 +179,44 @@ function Game() {
         this.coin=new Coin();
         this.showCoin();
       }
+    }
+    this.ObstacleFix = function() {
+      if(this.obstacle.x == this.coin.x && this.obstacle.y == this.coin.y) {
+        var obstacleBox = document.querySelector(".obstacle");
+        obstacleBox.classList.remove("obstacle");
+        this.obstacle=new Obstacle();
+        this.showObstacle();
+      }
+    }
+    this.Speed = function(){
+      var speed = document.querySelector("p");
+      var coinscore = document.querySelector("strong").innerText;
+      if (coinscore == 5 ){
+        var speed = document.querySelector("p");
+        speed.textContent = parseInt(200);
+      }  if (coinscore == 2*5 ){
+          var speed = document.querySelector("p");
+          speed.textContent = parseInt(300);
+        }  if (coinscore == 3*5 ){
+            var speed = document.querySelector("p");
+            speed.textContent = parseInt(400);
+          }  if (coinscore == 2*2*5 ){
+              var speed = document.querySelector("p");
+              speed.textContent = parseInt(500);
+            }  if (coinscore == 5*5 ){
+                var speed = document.querySelector("p");
+                speed.textContent = parseInt(600);
+              }  if (coinscore == 2*3*5 ){
+                  var speed = document.querySelector("p");
+                  speed.textContent = parseInt(700);
+                }   if (coinscore == 7*5 ){
+                    var speed = document.querySelector("p");
+                    speed.textContent = parseInt(800);
+                  }   if (coinscore == 8*5 ){
+                      var speed = document.querySelector("p");
+                      speed.textContent = "MAX";
+                      speed.style.color = "red"
+                    }
     }
 
     this.SpeedCoin = function(){
@@ -276,20 +323,19 @@ function Game() {
     //   self.moveFurry()  }, 100);
     //   console.log("speed up!");}
     }
-    this.Speed = function(){
-      var coinscore = document.querySelectorAll("strong").innerText;
-      var speed = document.querySelectorAll(".speed").innerText;
-      if (coinscore = 2){
-        speed = speed + 100;
-      }
-    }
+
     this.gameOver = function() {
       if (this.furry.x<0 || this.furry.x>9 || this.furry.y<0 || this.furry.y>9) {
         clearInterval(this.idSetInterval)
         var gameEnd = document.getElementById("over");
         gameEnd.classList.remove("invisible");
         this.hideVisibleFurry();
-        }
+      } if (this.furry.x == this.obstacle.x && this.furry.y == this.obstacle.y) {
+        clearInterval(this.idSetInterval)
+        var gameEnd = document.getElementById("over");
+        gameEnd.classList.remove("invisible");
+        this.hideVisibleFurry();
+      }
       }
 }
 });

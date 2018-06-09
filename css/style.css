@@ -118,6 +118,11 @@ height: 100vh;
   background-repeat: no-repeat;
   background-size: cover;
 }
+.obstacle {
+  background-image: url('../images/obstacle.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
 .p1 {
   background-image: url('../images/furry.png');
   background-repeat: no-repeat;
@@ -129,13 +134,22 @@ height: 100vh;
   background-image: url('../images/coin.png');
   background-repeat: no-repeat;
   background-size: cover;
-};
-.infocoin {
-  background-image: url('../images/coin.png');
+}
+.coin_info {
+  background-image: url('../images/coin2.png');
   background-repeat: no-repeat;
   height: 5em;
   text-align: center;
   padding: 1em;
+}
+.obstacle_info {
+  background-image: url('../images/obstacle.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  height: 3em;
+  text-align: center;
+  padding: 0.6em;
+  margin-bottom: 2em;
 }
 section#over {
   position: absolute;
