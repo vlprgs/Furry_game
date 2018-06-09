@@ -173,11 +173,16 @@ function Game() {
     this.CoinCollector = function() {
       if(this.furry.x == this.coin.x && this.furry.y == this.coin.y) {
         var coinBox = document.querySelector(".coin");
+        var obstacleBox = document.querySelector(".obstacle")
         coinBox.classList.remove("coin");
+        obstacleBox.classList.remove("obstacle")
         var result = document.querySelector("strong");
         result.textContent = parseInt(result.textContent) + 1;
         this.coin=new Coin();
         this.showCoin();
+        obstacleBox.classList.remove("obstacle")
+        this.obstacle=new Obstacle();
+        this.showObstacle();
       }
     }
     this.ObstacleFix = function() {
@@ -330,7 +335,7 @@ function Game() {
         var gameEnd = document.getElementById("over");
         gameEnd.classList.remove("invisible");
         this.hideVisibleFurry();
-      } if (this.furry.x == this.obstacle.x && this.furry.y == this.obstacle.y) {
+      } else if (this.furry.x == this.obstacle.x && this.furry.y == this.obstacle.y) {
         clearInterval(this.idSetInterval)
         var gameEnd = document.getElementById("over");
         gameEnd.classList.remove("invisible");
